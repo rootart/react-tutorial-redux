@@ -26,26 +26,32 @@ const store = createStore(
 
 // create form component
 
-let ContactForm = props => {
-    const { handleSubmit } = props
-    return (
-      <form onSubmit={ handleSubmit }>
-              <div>
-        <label htmlFor="firstName">First Name</label>
-        <Field name="firstName" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="lastName">Last Name</label>
-        <Field name="lastName" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <Field name="email" component="input" type="email" />
-      </div>
-      <button type="submit">Submit</button>
-      </form>
-    )
-  }
+class ContactForm extends React.Component {
+
+    lastNameChangeHandler = (e) => {
+        console.log(e);
+    }
+    render() {
+        return (
+            <form onSubmit={ this.props.handleSubmit }>
+                    <div>
+              <label htmlFor="firstName">First Name</label>
+              <Field name="firstName" component="input" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">Last Name</label>
+              <Field onChange={this.lastNameChangeHandler} name="lastName" component="input" type="text" />
+            </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <Field name="email" component="input" type="email" />
+            </div>
+            <button type="submit">Submit</button>
+            </form>
+          )
+    }
+
+}
 
 ContactForm = reduxForm({
 // a unique name for the form
